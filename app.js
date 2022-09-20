@@ -2,12 +2,25 @@
 const express = require('express')
 const bodyParser = require("body-parser")
 const ejs = require('ejs')
+const mongoose = require('mongoose')
+require('dotenv').config()
 
 const app = express()
+
+const url = process.env.DB_URL
 
 app.use(express.static("public"))
 app.set('view engine', 'ejs')
 app.use(bodyParser.urlencoded({extended:true}))
+
+mongoose.connect(url, {useNewUrlParser:true})
+
+const userSchema = {
+    email: String,
+    password: String
+};
+
+const User = new mongoose.model("User", userSchema)
 
 
 app.get("/",(req,res)=>{
