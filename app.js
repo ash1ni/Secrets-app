@@ -148,8 +148,6 @@ app.get("/logout",function(req,res,next){
     
 })
 
-
-
 app.post("/register",(req,res)=>{
 
     User.register({username: req.body.username}, req.body.password, (err,user)=>{
